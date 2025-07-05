@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>서울백산초등학교 디지털 기반 교육 혁신 컨설팅 보고서</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f0f2f5;
+        }
+        .slide-container {
+            max-width: 1280px;
+            margin: 2rem auto;
+            aspect-ratio: 16 / 9;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border-radius: 12px;
+        }
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+            background-color: #ffffff;
+            padding: 2.5rem 4rem; /* 패딩 조정 */
+            display: flex;
+            flex-direction: column;
+        }
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .nav-button {
+            position: absolute;
+            bottom: 2rem;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            z-index: 10;
+            transition: background-color 0.2s;
+        }
+        .nav-button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .prev { left: 2rem; }
+        .next { right: 2rem; }
+        .slide-counter {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.1);
+            color: #333;
+            padding: 0.5rem 1rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            z-index: 10;
+        }
+        /* --- 폰트 크기 수정 --- */
+        h1 { font-size: 3rem; font-weight: 900; line-height: 1.2; }
+        h2 { 
+            font-size: 40px; /* 제목 폰트 크기 */
+            font-weight: 700; 
+            color: #1e3a8a; 
+            margin-bottom: 1rem; 
+            border-left: 5px solid #3b82f6; 
+            padding-left: 1rem;
+        }
+        h3 { font-size: 1.5rem; font-weight: 600; color: #1e40af; margin-bottom: 1rem; }
+        p { 
+            font-size: 35px; /* 본문 폰트 크기 */
+            line-height: 1.7; /* 줄간격 조정 */
+            color: #334155; 
+        }
+        ul { list-style-position: inside; }
+        li { 
+            margin-bottom: 0.75rem; 
+            font-size: 35px; /* 본문 리스트 폰트 크기 */
+            line-height: 1.7; /* 줄간격 조정 */
+        }
+        .quote {
+            background-color: #f1f5f9;
+            border-left: 4px solid #64748b;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-style: italic;
+            color: #475569;
+            font-size: 35px; /* 본문 인용구 폰트 크기 */
+            line-height: 1.7;
+        }
+        /* --- 폰트 크기 수정 끝 --- */
+        .highlight { color: #be123c; font-weight: 700; } /* Tailwind's rose-700 */
+        .badge { display: inline-block; background-color: #e0e7ff; color: #3730a3; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 500; margin: 0.25rem; }
+        
+    </style>
+</head>
+<body>
+
+    <div class="slide-container">
+        <div id="slide1" class="slide active flex-col justify-center items-center text-center bg-gray-800 text-white">
+            <span class="text-2xl font-light text-blue-300">찾아가는 학교 컨설팅</span>
+            <h1 class="mt-4 mb-6 text-6xl">서울백산초등학교<br>디지털 기반 교육 혁신 컨설팅 보고서</h1>
+            <p class="text-xl text-gray-300" style="font-size: 1.25rem; line-height: 1.75rem;">학교의 내일을 위한 디지털 전환, 그 현황과 과제 그리고 미래</p>
+            <div class="mt-12 text-lg text-gray-400">
+                <span>서울백산초등학교</span> | <span>서울특별시교육청</span>
+            </div>
+        </div>
+
+        <div id="slide2" class="slide">
+            <h2>📜 보고서 목차</h2>
+            <div class="grid grid-cols-2 gap-x-12 gap-y-6 mt-4 text-xl">
+                <div class="space-y-3">
+                    <h3 class="text-blue-700" style="font-size: 1.8rem;">Part 1. 컨설팅 개요</h3>
+                    <ul class="list-disc list-inside ml-4 text-gray-600" style="font-size: 1.5rem;">
+                        <li>컨설팅 배경 및 목표</li>
+                    </ul>
+                    <h3 class="text-blue-700 mt-4" style="font-size: 1.8rem;">Part 2. 디지털 환경 진단</h3>
+                    <ul class="list-disc list-inside ml-4 text-gray-600" style="font-size: 1.5rem;">
+                        <li>기기 보급 및 성능 분석</li>
+                        <li>무선 인터넷 및 유지보수 현황</li>
+                        <li>디지털 도구 활용 현황</li>
+                        <li>기술적 애로사항 분석</li>
+                        <li>특수 학생 지원 과제</li>
+                    </ul>
+                </div>
+                <div class="space-y-3">
+                    <h3 class="text-blue-700" style="font-size: 1.8rem;">Part 3. 교원 역량 진단</h3>
+                    <ul class="list-disc list-inside ml-4 text-gray-600" style="font-size: 1.5rem;">
+                        <li>역량 자가진단 분석 (정량)</li>
+                        <li>교원 의견 및 참여 의지 (정성)</li>
+                    </ul>
+                    <h3 class="text-blue-700 mt-4" style="font-size: 1.8rem;">Part 4. 제언 및 로드맵</h3>
+                    <ul class="list-disc list-inside ml-4 text-gray-600" style="font-size: 1.5rem;">
+                        <li>연수 지원 방안: 기초 역량</li>
+                        <li>연수 지원 방안: 심화 역량</li>
+                        <li>맞춤형 컨설팅 및 지속 지원</li>
+                    </ul>
+                     <h3 class="text-blue-700 mt-4" style="font-size: 1.8rem;">Part 5. 결론</h3>
+                    <ul class="list-disc list-inside ml-4 text-gray-600" style="font-size: 1.5rem;">
+                        <li>기대 효과 및 성장 전망</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div id="slide3" class="slide">
+            <h2>🎯 컨설팅 개요</h2>
+            <div class="mt-4 p-6 bg-blue-50 rounded-lg">
+                <p class="leading-relaxed">
+                    본 컨설팅은 <span class="font-bold text-blue-600">'찾아가는 학교 컨설팅'</span>의 일환으로, <span class="font-bold text-blue-600">서울백산초등학교</span>의 디지털 기반 교육 혁신 현황을 정밀 진단하고, <span class="highlight">교실혁명 및 교원 연수 지원 방안</span>을 모색하는 것을 목표로 합니다.
+                </p>
+            </div>
+             <div class="mt-6 grid grid-cols-3 gap-6 text-center">
+                <div class="p-4 bg-gray-100 rounded-lg">
+                    <div class="text-4xl mb-2">🏫</div>
+                    <h3 class="text-lg font-bold">대상 학교</h3>
+                    <p style="font-size: 24px;">서울백산초등학교</p>
+                </div>
+                <div class="p-4 bg-gray-100 rounded-lg">
+                    <div class="text-4xl mb-2">🏢</div>
+                    <h3 class="text-lg font-bold">소속 교육청</h3>
+                    <p style="font-size: 24px;">서울특별시교육청</p>
+                </div>
+                <div class="p-4 bg-gray-100 rounded-lg">
+                    <div class="text-4xl mb-2">💡</div>
+                    <h3 class="text-lg font-bold">핵심 목표</h3>
+                    <p style="font-size: 24px;">현황 진단 및 지원 방안 모색</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="slide4" class="slide">
+             <h2>📊 진단 영역 1: 디지털 환경 현황</h2>
+             <p>학교의 디지털 인프라와 실제 활용 실태를 다각적으로 분석합니다.</p>
+             <div class="flex-grow flex items-center justify-center">
+                <p class="text-7xl font-bold text-gray-300" style="font-size: 5rem;">PART 2<br>디지털 환경 진단</p>
+            </div>
+        </div>
+
+        <div id="slide5" class="slide">
+            <h2>💻 교사용 디지털 기기 보급 현황</h2>
+            <div class="flex-grow grid grid-cols-2 gap-8 items-center">
+                <div>
+                    <canvas id="deviceChart"></canvas>
+                </div>
+                <div>
+                    <h3 class="text-gray-800" style="font-size: 30px;">분석 결과</h3>
+                    <p style="font-size: 28px; line-height: 1.6;">'다소 충분'(30.4%)과 '보통'(26.1%)이 과반을 차지하나, '다소 부족'(17.4%) 또는 <span class="highlight">'매우 부족'(4.4%)</span> 응답도 존재하여 편차가 있음을 시사합니다.</p>
+                    <h3 class="mt-4 text-gray-800" style="font-size: 30px;">주요 사용 기기</h3>
+                    <div class="mt-2" style="font-size: 20px;">
+                        <span class="badge">노트북</span>
+                        <span class="badge">크롬북</span>
+                        <span class="badge">안드로이드 태블릿</span>
+                        <span class="badge">아이패드</span>
+                        <span class="badge">PC</span>
+                        <span class="badge">핸드폰</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="slide6" class="slide">
+            <h2>🐢 디지털 기기 성능 및 속도</h2>
+            <div class="grid grid-cols-2 gap-8 h-full">
+                <div class="p-6 bg-red-50 rounded-lg flex flex-col justify-center">
+                    <h3 class="text-red-800">성능에 대한 인식 🐌</h3>
+                    <p>'보통이다' (39.1%) 응답이 가장 많았으나, <span class="highlight">'그렇지 않다' (26.1%)</span>는 부정적 응답이 상당수였습니다.</p>
+                </div>
+                <div class="p-6 bg-yellow-50 rounded-lg flex flex-col justify-center">
+                    <h3 class="text-yellow-800">현장의 목소리 📢</h3>
+                    <p class="quote" style="font-size: 28px;">"퀴즈 사이트 접속 시 <span class="highlight">절반은 참여가 불가능</span>해요."</p>
+                    <p class="quote" style="font-size: 28px;">"동시 접속하면 <span class="highlight">접속 안 되는 학생이 다수 발생</span>합니다."</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="slide7" class="slide">
+            <h2>📶 무선 인터넷 및 유지보수</h2>
+            <div class="grid grid-cols-2 gap-8 h-full">
+                <div class="space-y-4">
+                    <h3>무선 인터넷 안정성</h3>
+                    <p style="font-size: 28px; line-height: 1.6;">'다소 안정적'(47.8%)이 가장 높았으나, 약 17%의 교사가 <span class="highlight">'불안정' 또는 '매우 불안정'</span>하다고 응답했습니다.</p>
+                    <p class="quote" style="font-size: 24px;">"수업 중 접속 끊김이나 지연이 자주 발생합니다."</p>
+                    <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                        <p class="font-bold text-blue-800" style="font-size: 26px;">💡 개선 요청: "교육청의 무선랜 속도 지원(와이파이 증설)이 필요합니다."</p>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <h3>디지털 기기 유지보수</h3>
+                    <p style="font-size: 28px; line-height: 1.6;">약 70%가 긍정 평가했으나, "업체 방문일에만 AS 가능" 또는 "교사가 직접 AS 요청" 등 <span class="highlight">절차 개선의 여지</span>가 보입니다.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="slide8" class="slide">
+            <h2>🛠️ 현재 활용 중인 디지털 도구</h2>
+            <p style="font-size: 28px;">기본 도구부터 AI, 협업, 코딩 도구까지 폭넓게 활용되고 있습니다.</p>
+            <div class="mt-4 space-y-2 text-2xl">
+                <div>
+                    <h3 class="font-semibold text-gray-700">🎨 콘텐츠 제작/발표</h3>
+                    <p style="font-size: 24px;"><span class="badge">Canva</span> <span class="badge">Google Slides</span> <span class="badge">PowerPoint</span> <span class="badge">Prezi</span> <span class="badge">미리캔버스</span> <span class="badge">웍스AI</span></p>
+                </div>
+                 <div>
+                    <h3 class="font-semibold text-gray-700">🤖 AI/자료 분석</h3>
+                    <p style="font-size: 24px;"><span class="badge">ChatGPT</span> <span class="badge">Khanmigo</span> <span class="badge">Quillbot</span> <span class="badge">미래엔 AI 클래스</span> <span class="badge">똑똑 수학탐험대</span></p>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-gray-700">📝 협업/소통</h3>
+                    <p style="font-size: 24px;"><span class="badge">Google Docs</span> <span class="badge">Padlet</span> <span class="badge">Jamboard</span> <span class="badge">Discord</span> <span class="badge">Zoom</span> <span class="badge">Google Meet</span></p>
+                </div>
+                 <div>
+                    <h3 class="font-semibold text-gray-700">🎮 학습 참여/코딩</h3>
+                    <p style="font-size: 24px;"><span class="badge">Kahoot!</span> <span class="badge">Quizizz</span> <span class="badge">Tynker</span> <span class="badge">Code.org</span> <span class="badge">Class123</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="slide9" class="slide">
+            <h2>😥 기술적 애로사항 1: 계정 관리</h2>
+            <div class="mt-6 space-y-6">
+                <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-lg">
+                    <div class="text-5xl">🔑</div>
+                    <div>
+                        <h3 class="mt-0">학생 계정 발급 및 관리</h3>
+                        <p style="font-size: 32px; line-height: 1.6;"><span class="highlight">통합 계정 발급 방안 마련</span>에 대한 요구와 개별 기기 계정 관리의 어려움을 호소합니다.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-lg">
+                    <div class="text-5xl">👶</div>
+                    <div>
+                        <h3 class="mt-0">저학년의 ID 입력 문제</h3>
+                        <p style="font-size: 32px; line-height: 1.6;">초3 학생들의 <span class="highlight">영문 아이디 입력 어려움</span>이 큰 장벽으로 작용하여, <span class="highlight">계정 간소화</span> 방안이 시급합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="slide10" class="slide">
+            <h2>😥 기술적 애로사항 2: 기기 및 SW 세팅</h2>
+             <div class="mt-6 space-y-6">
+                <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-lg">
+                    <div class="text-5xl">📜</div>
+                    <div>
+                        <h3 class="mt-0">기기 관리 규칙 및 지원</h3>
+                        <p style="font-size: 32px; line-height: 1.6;">일관성 있는 <span class="highlight">기기 관리 규칙 수립</span>과 현장 적용을 돕는 기술 지원이 필요합니다.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-lg">
+                    <div class="text-5xl">⚙️</div>
+                    <div>
+                        <h3 class="mt-0">SW 세팅 문제</h3>
+                        <p style="font-size: 32px; line-height: 1.6;">수업용 앱/프로그램의 <span class="highlight">일괄 설치 및 업데이트의 어려움</span>이 주요 애로사항으로 지적되었습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="slide11" class="slide">
+            <h2>❤️ 기술적 애로사항 3: 특수 학생 지원</h2>
+            <p class="quote">"디지털 교과서 도입에 <span class="highlight">특수학생들의 적용이 걱정됩니다.</span>"</p>
+            <div class="mt-4 grid grid-cols-2 gap-6 flex-grow">
+                <div class="p-4 bg-orange-50 rounded-lg">
+                    <h3 class="text-orange-800">구체적 어려움</h3>
+                    <ul class="list-disc list-inside mt-2 text-gray-700" style="font-size: 28px; line-height: 1.8;">
+                        <li>한글 미해득 학생의 계정/로그인</li>
+                        <li>시지각 처리 어려움 학생의 기기 사용</li>
+                        <li>기기 분실 및 관리 문제 (인력 부족)</li>
+                    </ul>
+                </div>
+                <div class="p-4 bg-green-50 rounded-lg">
+                    <h3 class="text-green-800">지원 요청 사항</h3>
+                    <p class="font-bold" style="font-size: 30px; line-height: 1.7;">"특수학생에게 어떻게 적용할지 <span class="highlight">구체적인 예시</span>를 담은 맞춤형 연수가 필요합니다."</p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="slide12" class="slide">
+             <h2>📊 진단 영역 2: 교원 역량 현황</h2>
+             <p>교사들의 디지털 교육 역량 수준과 연수에 대한 기대를 분석합니다.</p>
+             <div class="flex-grow flex items-center justify-center">
+                <p class="text-7xl font-bold text-gray-300" style="font-size: 5rem;">PART 3<br>교원 역량 진단</p>
+            </div>
+        </div>
+
+        <div id="slide13" class="slide">
+            <h2 style="margin-bottom: 0;">📉 교원 역량 자가진단 (5점 만점)</h2>
+            <p style="font-size: 24px; margin-top: 0.5rem;">심화된 수업 설계 및 데이터 분석 관련 역량에서 개선 필요성이 나타났습니다.</p>
+            <div class="flex-grow mt-2">
+                 <canvas id="competencyChart" style="max-height: 500px;"></canvas>
+            </div>
+        </div>
+
+        <div id="slide14" class="slide">
+            <h2>🗣️ 교원 역량 자가진단: 심층 분석</h2>
+            <p style="font-size: 30px;">평균 3점 미만의 항목들은 향후 연수 지원의 핵심 영역이 되어야 합니다.</p>
+            <div class="mt-4 p-6 bg-blue-50 rounded-lg">
+                <p class="font-bold text-blue-800" style="font-size: 32px;">🎯 연수 지원 핵심 영역</p>
+                <ul class="list-disc list-inside mt-2 text-gray-700" style="font-size: 30px; line-height: 1.8;">
+                    <li>학습 데이터 분석 및 이력 관리 (<span class="highlight">2.74점</span>)</li>
+                    <li>학생 맞춤형 및 참여형 수업 설계 (<span class="highlight">2.78점</span>)</li>
+                    <li>교육과정 연계 도구 활용 (<span class="highlight">2.83점</span>)</li>
+                    <li>학생 디지털 리터러시 지도 (<span class="highlight">2.83점</span>)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="slide15" class="slide">
+            <h2>🙏 교원의 기대와 참여 의지</h2>
+            <div class="mt-2 space-y-3">
+                 <p class="quote">"교사에게 <span class="highlight">실질적으로 도움 되는 연수</span> 제공"</p>
+                 <p class="quote">"<span class="highlight">확실하게 배워 활용</span>하며 흥미와 자신감을 얻고 싶음"</p>
+                 <p class="quote">"<span class="highlight">각자의 입장에서 활용할 수 있는 콘텐츠</span>를 배우길 희망"</p>
+                 <p class="quote">"변화하는 시대에 막막함, <span class="highlight">연수 준비 시 열심히 수강</span>하겠음"</p>
+            </div>
+        </div>
+        
+        <div id="slide16" class="slide">
+             <h2>🚀 제언: 디지털 교육 혁신 지원 방안</h2>
+             <p>진단 결과를 바탕으로, 맞춤형 연수 및 지원 방안을 제안합니다.</p>
+             <div class="flex-grow flex items-center justify-center">
+                <p class="text-7xl font-bold text-gray-300" style="font-size: 5rem;">PART 4<br>제언 및 로드맵</p>
+            </div>
+        </div>
+        
+        <div id="slide17" class="slide">
+            <h2>🗺️ 연수 지원 로드맵</h2>
+            <div class="flex flex-col flex-grow justify-center space-y-4">
+                <div class="flex items-center gap-6 p-4 bg-gray-100 rounded-xl shadow">
+                    <div class="text-4xl font-bold text-blue-600">Step 1</div>
+                    <div>
+                        <h3 class="text-2xl text-blue-800 mt-0">기초 역량 강화 🌱</h3>
+                        <p class="text-lg text-gray-700" style="font-size: 26px; line-height: 1.6;">기술적 장벽 해소 및 기본 도구 활용법 습득</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-6 p-4 bg-gray-100 rounded-xl shadow">
+                    <div class="text-4xl font-bold text-green-600">Step 2</div>
+                    <div>
+                        <h3 class="text-2xl text-green-800 mt-0">심화 역량 개발 🌳</h3>
+                        <p class="text-lg text-gray-700" style="font-size: 26px; line-height: 1.6;">데이터 기반 수업 설계, 참여형 수업, 디지털 윤리 교육</p>
+                    </div>
+                </div>
+                 <div class="flex items-center gap-6 p-4 bg-gray-100 rounded-xl shadow">
+                    <div class="text-4xl font-bold text-purple-600">Step 3</div>
+                    <div>
+                        <h3 class="text-2xl text-purple-800 mt-0">지속적 성장 지원 🤝</h3>
+                        <p class="text-lg text-gray-700" style="font-size: 26px; line-height: 1.6;">개인별/직급별 맞춤형 컨설팅, 특수 학생 지원, 상시 지원</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="slide18" class="slide">
+            <h2>제언 1. 기초 역량 강화 연수 🌱</h2>
+            <p style="font-size: 30px;">디지털 교육의 첫걸음을 위한 기술적, 기능적 장벽 해소</p>
+            <ul class="mt-4 space-y-4 list-none">
+                <li class="flex items-start gap-4"><span class="text-4xl mt-1">📱</span><div><strong>디벗 및 디지털 교과서 활용:</strong> 기기 접근성 증대 및 새 교육 시스템 적응 지원</div></li>
+                <li class="flex items-start gap-4"><span class="text-4xl mt-1">🔑</span><div><strong>기기/계정 관리 및 SW 세팅:</strong> 기술적 애로사항 해소 및 수업 준비 부담 경감</div></li>
+                <li class="flex items-start gap-4"><span class="text-4xl mt-1">🎨</span><div><strong>기본 디지털 도구 활용법:</strong> Canva 등 즉시 활용 가능한 도구의 기초/심화 교육</div></li>
+            </ul>
+        </div>
+
+        <div id="slide19" class="slide">
+            <h2>제언 2. 심화 수업 설계/데이터 활용 🌳</h2>
+            <p style="font-size: 30px;">디지털 기술을 활용한 수업의 질 제고 및 개별 맞춤 교육 실현</p>
+            <ul class="mt-4 space-y-4 list-none">
+                <li class="flex items-start gap-4"><span class="text-4xl mt-1">🎯</span><div><strong>맞춤형/참여형 수업 설계:</strong> 하이테크-하이터치 기반 개별화 학습 경험 제공</div></li>
+                <li class="flex items-start gap-4"><span class="text-4xl mt-1">📊</span><div><strong>데이터 활용 및 분석:</strong> 학습 데이터 기반 수업 성찰 및 개선 역량 지원</div></li>
+                <li class="flex items-start gap-4"><span class="text-4xl mt-1">💡</span><div><strong>무료 AI 프로그램 활용:</strong> 즉시 적용 가능한 실용적 AI 도구 활용법 교육</div></li>
+                 <li class="flex items-start gap-4"><span class="text-4xl mt-1">🛡️</span><div><strong>디지털 윤리 및 리터러시:</strong> 학생들의 비판적 사고 지도 역량 강화</div></li>
+            </ul>
+        </div>
+
+        <div id="slide20" class="slide">
+            <h2>제언 3. 맞춤형 연수 및 지속적 지원 🤝</h2>
+            <p style="font-size: 30px;">'찾아가는 학교 컨설팅'으로 현장의 필요를 직접 해결하고 지속 성장 지원</p>
+             <ul class="mt-4 space-y-4 list-none">
+                <li class="flex items-start gap-4"><span class="text-4xl mt-1">🧑‍🏫</span><div><strong>개별/직급별 맞춤형 연수:</strong> "확실하게 배우고 활용"하여 자신감 부여, 직급별 맞춤 콘텐츠 제공</div></li>
+                <li class="flex items-start gap-4"><span class="text-4xl mt-1">❤️</span><div><strong>특수 학생 지원 전문 연수:</strong> "구체적인 예시"를 포함하여 실질적 문제 해결 방안 논의</div></li>
+                 <li class="flex items-start gap-4"><span class="text-4xl mt-1">💬</span><div><strong>체계적인 운영 지원:</strong> 오픈채팅방, 자료 드라이브 등 소통 및 지원 채널 활성화</div></li>
+            </ul>
+        </div>
+
+        <div id="slide21" class="slide">
+            <h2>✨ 컨설팅에 대한 기대 및 성장 전망</h2>
+            <div class="mt-4 space-y-4 flex-grow">
+                 <div class="p-4 bg-green-50 rounded-lg h-1/3 flex items-center">
+                    <p><strong class="text-green-800">교사의 성장 👨‍🏫👩‍🏫: </strong>디지털 <span class="highlight">자신감과 전문성</span> 확보, 수업의 질적 향상을 통한 <span class="highlight">연수의 보람</span> 증대</p>
+                </div>
+                 <div class="p-4 bg-blue-50 rounded-lg h-1/3 flex items-center">
+                    <p><strong class="text-blue-800">학생의 성장 👧👦: </strong><span class="highlight">자기주도적 학습 능력과 참여도</span> 향상 및 <span class="highlight">학습 격차 완화</span></p>
+                </div>
+                <div class="p-4 bg-purple-50 rounded-lg h-1/3 flex items-center">
+                    <p><strong class="text-purple-800">학교의 성장 🏫: </strong><span class="highlight">'교사가 이끄는 교실혁명'</span> 가치 실현 및 미래 교육 선도 학교로 발전</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="slide22" class="slide flex-col justify-center items-center">
+            <h2 class="text-7xl" style="font-size: 5rem; border: none;">Q & A</h2>
+            <p class="mt-4 text-5xl text-gray-500">질의응답</p>
+        </div>
+        
+        <div id="slide23" class="slide flex-col justify-center items-center bg-gray-800 text-white">
+            <h2 class="text-7xl text-white border-none" style="font-size: 5rem;">감사합니다</h2>
+            <p class="mt-4 text-4xl text-gray-300">서울백산초등학교의 빛나는 디지털 미래를 응원합니다.</p>
+        </div>
+
+
+        </div>
+
+    <div class="nav-container" style="max-width: 1280px; margin: 0 auto; position: relative; height: 5rem;">
+        <button id="prev" class="nav-button prev">이전</button>
+        <div id="counter" class="slide-counter">1 / 23</div>
+        <button id="next" class="nav-button next">다음</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prev');
+            const nextBtn = document.getElementById('next');
+            const counter = document.getElementById('counter');
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            let competencyChartInstance = null;
+            let deviceChartInstance = null;
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+                currentSlide = index;
+                counter.textContent = `${currentSlide + 1} / ${totalSlides}`;
+
+                // 차트 렌더링 최적화
+                if (slides[index].id === 'slide5' && !deviceChartInstance) {
+                    renderDeviceChart();
+                }
+                if (slides[index].id === 'slide13' && !competencyChartInstance) {
+                    renderCompetencyChart();
+                }
+            }
+
+            nextBtn.addEventListener('click', () => {
+                const nextIndex = (currentSlide + 1) % totalSlides;
+                showSlide(nextIndex);
+            });
+
+            prevBtn.addEventListener('click', () => {
+                const prevIndex = (currentSlide - 1 + totalSlides) % totalSlides;
+                showSlide(prevIndex);
+            });
+            
+            document.addEventListener('keydown', (e) => {
+                if(e.key === 'ArrowRight') {
+                    nextBtn.click();
+                } else if (e.key === 'ArrowLeft') {
+                    prevBtn.click();
+                }
+            });
+
+
+            function renderDeviceChart() {
+                const ctx = document.getElementById('deviceChart').getContext('2d');
+                deviceChartInstance = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['매우 충분', '다소 충분', '보통', '다소 부족', '매우 부족'],
+                        datasets: [{
+                            label: '교사용 디지털 기기 보급 수준',
+                            data: [21.74, 30.43, 26.09, 17.39, 4.35],
+                            backgroundColor: [
+                                'rgba(22, 163, 74, 0.8)',
+                                'rgba(5, 150, 105, 0.7)',
+                                'rgba(251, 191, 36, 0.7)',
+                                'rgba(249, 115, 22, 0.7)',
+                                'rgba(220, 38, 38, 0.8)'
+                            ],
+                            borderColor: '#ffffff',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: { font: { size: 14 } }
+                            },
+                            title: {
+                                display: true,
+                                text: '교사용 디지털 기기 보급 수준 (%)',
+                                font: { size: 16 }
+                            }
+                        }
+                    }
+                });
+            }
+
+            function renderCompetencyChart() {
+                const ctx = document.getElementById('competencyChart').getContext('2d');
+                competencyChartInstance = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: [
+                            '학습 데이터 분석/관리', 
+                            '맞춤/참여형 수업 설계', 
+                            '교육과정 연계 도구 활용',
+                            '학생 디지털 리터러시 지도', 
+                            '과정 중심 평가 도구 활용', 
+                            '교실혁명 역량 이해'
+                        ],
+                        datasets: [{
+                            label: '평균 점수 (5점 만점)',
+                            data: [2.74, 2.78, 2.83, 2.83, 2.87, 2.91],
+                            backgroundColor: 'rgba(59, 130, 246, 0.6)',
+                            borderColor: 'rgba(37, 99, 235, 1)',
+                            borderWidth: 1,
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                max: 5
+                            },
+                            y: {
+                                ticks: {
+                                    font: {
+                                        size: 14
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: { display: false },
+                            title: {
+                                display: false,
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `${context.dataset.label}: ${context.raw}점`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            showSlide(0);
+        });
+    </script>
+</body>
+</html>
