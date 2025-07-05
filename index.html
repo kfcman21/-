@@ -5,15 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>서울백산초등학교 디지털 기반 교육 혁신 컨설팅 보고서</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        /* --- 폰트 적용 --- */
         body {
+            /* 전반적인 기본 폰트를 Noto Sans KR로 설정 */
             font-family: 'Noto Sans KR', sans-serif;
             background-color: #f0f2f5;
         }
+        /* 본문 내용(p, li, quote)은 Pretendard 폰트를 우선 적용 */
+        p, li, .quote { 
+            font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+        }
+        /* --- 폰트 적용 끝 --- */
+
         .slide-container {
             max-width: 1280px;
             margin: 2rem auto;
@@ -70,7 +79,6 @@
             font-size: 0.875rem;
             z-index: 10;
         }
-        /* --- 폰트 크기 수정 --- */
         h1 { font-size: 3rem; font-weight: 900; line-height: 1.2; }
         h2 { 
             font-size: 40px; /* 제목 폰트 크기 */
@@ -102,8 +110,7 @@
             font-size: 35px; /* 본문 인용구 폰트 크기 */
             line-height: 1.7;
         }
-        /* --- 폰트 크기 수정 끝 --- */
-        .highlight { color: #be123c; font-weight: 700; } /* Tailwind's rose-700 */
+        .highlight { color: #be123c; font-weight: 700; }
         .badge { display: inline-block; background-color: #e0e7ff; color: #3730a3; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 500; margin: 0.25rem; }
         
     </style>
@@ -542,12 +549,12 @@
                         plugins: {
                             legend: {
                                 position: 'bottom',
-                                labels: { font: { size: 14 } }
+                                labels: { font: { size: 14, family: "'Pretendard', 'Noto Sans KR', sans-serif" } }
                             },
                             title: {
                                 display: true,
                                 text: '교사용 디지털 기기 보급 수준 (%)',
-                                font: { size: 16 }
+                                font: { size: 16, family: "'Noto Sans KR', sans-serif" }
                             }
                         }
                     }
@@ -587,7 +594,8 @@
                             y: {
                                 ticks: {
                                     font: {
-                                        size: 14
+                                        size: 14,
+                                        family: "'Pretendard', 'Noto Sans KR', sans-serif"
                                     }
                                 }
                             }
